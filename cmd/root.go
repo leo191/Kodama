@@ -16,19 +16,17 @@ limitations under the License.
 package cmd
 
 import (
+	"bitbucket.org/leo191/kodama/utils"
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
-	"bitbucket.org/leo191/kodama/utils"
 )
-
-
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "kodama",
 	Short: "Kodama is a lightweight monitoring tool written in Go",
-	Long: `Kodama is push based monitoring solution for sysadmins`,
+	Long:  `Kodama is push based monitoring solution for sysadmins`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	//	Run: func(cmd *cobra.Command, args []string) { },

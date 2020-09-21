@@ -31,10 +31,10 @@ func (l *StandardLogger) Log(level int8, msg string, err error) {
 	case err == nil:
 		l.Infoln(msg)
 	case level == 1:
-		l.Warningln(err, msg)
+		l.Warningf("Issue: %s ----- Message: %s",err, msg)
 	case level == 2:
-		l.Errorln(err, msg)
+		l.Errorf("Issue: %s ----- Message: %s",err, msg)
 	case level == 3:
-		l.Fatalln(err, msg)
+		l.Fatalf("Issue: %s ----- Message: %s",err, msg)
 	}
 }

@@ -16,26 +16,111 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
+	"os"
+
+	"io/ioutil"
 	"bitbucket.org/leo191/kodama/utils"
 	"github.com/spf13/cobra"
+	"time"
+	"github.com/elliotchance/sshtunnel"
 )
+
+var logger = utils.NewLogger("test.log")
+
+
+
+// func runProbe(client *ssh.Client, source string){
+// 	sess, err := client.NewSession()
+// 	logger.Log(2, source, err)
+// 	script, _ := os.OpenFile(source, os.O_RDWR, 0755)
+// 	sess.Stdin = script
+// 	cmd := "bash -s --"
+// 	out, err := sess.CombinedOutput(cmd)
+// 	logger.Log(3, string(out), err)
+// 	defer sess.Close()
+// 	defer script.Close()
+// }
+
+
+func readHosts(*cobra.Command, []string){
+
+	tunnel := sshtunnel.NewSSHTunnel(
+		// User and host of tunnel server, it will default to port 22
+		// if not specified.
+		"ec2-user@jumpbox.us-east-1.mydomain.com",
+	 
+		// Pick ONE of the following authentication methods:
+		sshtunnel.PrivateKeyFile("/home/leo/Downloads/awstest.pem"), // 1. private key
+	 
+		// The destination host and port of the actual server.
+		"dqrsdfdssdfx.us-east-1.redshift.amazonaws.com:5439",
+		
+		// The local port you want to bind the remote port to.
+		// Specifying "0" will lead to a random port.
+		"8443",
+	 )
+	 
+	// f, err := ioutil.ReadFile("hosts.txt")
+	// logger.Log(3, string(f), err)
+	// client, _, err := connectToHost("ubuntu", string(f)+":22")
+	// // for i := 0; i<10; i++ {
+	// for i:=0;i<1000;i++ {
+	// 	go runProbe(client, "process")
+	// 	// go runProbe(client, "os")
+	// }
+	// // go runProbe(client, "process")
+	// // go runProbe(client, "os")
+	// 	// go runProbe(client, "os")
+	// // }
+	// time.Sleep(time.Second * 2)
+	// defer client.Close()
+}
+
+// func connectToHost(user, hostport string) (*ssh.Client, *ssh.Session, error){
+// 	sshConfig := &ssh.ClientConfig{
+// 		User: user,
+// 		Auth: []ssh.AuthMethod{
+// 			publicKey("/home/leo/Downloads/awstest.pem"),
+// 		},
+// 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+// 		}
+// 	client, err := ssh.Dial("tcp", hostport, sshConfig)
+// 	if err != nil {
+// 		return nil, nil, err
+// 	}
+
+// 	session, err := client.NewSession()
+// 	if err != nil {
+// 		client.Close()
+// 		return nil, nil, err
+// 	}
+// 	return client, session, nil
+// }
+
+// func publicKey(path string) ssh.AuthMethod {
+// 	key, err := ioutil.ReadFile(path)
+// 	if err != nil {
+// 	 panic(err)
+// 	}
+// 	signer, err := ssh.ParsePrivateKey(key)
+// 	if err != nil {
+// 	 panic(err)
+// 	}
+// 	return ssh.PublicKeys(signer)
+//    }
+ //   
+
+
 
 // startCmd represents the start command
 var startCmd = &cobra.Command{
 	Use:   "start",
 	Short: "Start kodama",
-	Run: func(cmd *cobra.Command, args []string) {
-		data, err := cmd.Flags().GetString("toggle")
-		logger := utils.NewLogger("test.log")
-		logger.Log(1, data, err)
-		fmt.Println(data)
-	},
+	Run: readHosts,
 }
 
 func init() {
 	rootCmd.AddCommand(startCmd)
-
 
 	// startCmd.PersistentFlags().String("foo", "", "A help for foo")
 
