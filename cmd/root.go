@@ -1,5 +1,5 @@
 /*
-Copyright © 2020 Subhadip Banerjee subhadipbanerjee527@gmail.com
+Copyright © 2020 SUBHADIP BANERJEE subhadipbanerjee527@gmail.com
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
