@@ -1,6 +1,8 @@
-# README #
+# KODAMA #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Kodama is a lightweight host insight collector which also a monitoring agent.
+It utilize the goroutines for fast and cheap execution of state data collection.
+
 
 ### What is this repository for? ###
 
@@ -25,5 +27,4 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* leo191
